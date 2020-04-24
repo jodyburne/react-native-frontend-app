@@ -42,7 +42,8 @@ const ListItem = ({value, handler, icon, style, placeholder, onChange, editable}
                     value={value} 
                     autoCorrect={false}
                     editable={editable}
-                    onChangeText={onChange}/>
+                    onChangeText={onChange}
+                    onSubmitEditing={handler}/>
             <CrossContainer
                 onPress={handler}>
                 <Icon 

@@ -5,8 +5,7 @@ import Duration from '../components/addTrip/Duration';
 import ListItem from '../components/ui/ListItem';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import DeleteIcon from 'react-native-vector-icons/AntDesign';
-import DeleteModal from '../components/DeleteModal';
+import DeleteModal, {OpenModalLink} from '../components/DeleteModal';
 import Footer from '../components/ui/Footer';
 import Button from '../components/ui/Button';
 
@@ -49,13 +48,6 @@ const LinkText = styled.Text`
     font-size: 12px;
 `;
 
-const DeleteText = styled.Text`
-    color: #FFFFFF;
-    font-size: 12px;
-    text-decoration: underline;
-    margin-left: 5px;
-`;
-
 const Label = styled.Text`
     color: #FFFFFF;
     font-size: 16px;
@@ -91,6 +83,9 @@ const TripDetailScreen = ({navigation}) => {
                         //transparent={true}
                         visible={visible}>
                         <DeleteModal 
+                            title={trip.name}
+                            mainText="Are you sure you want to remove this trip?"
+                            smallPrint={`By removing ${trip.name} from your trips you are also removing the list of places related to it`}
                             cancelHandler={() => setVisible(!visible)}
                             removeHandler={() => {
                                 setVisible(!visible)
@@ -141,16 +136,10 @@ const TripDetailScreen = ({navigation}) => {
                                 </Lower>
                             </CheckListContainer>
                         </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => setVisible(true)}
-                            style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', margin: 15}}>
-                            <DeleteIcon 
-                                name="delete"
-                                size={25}
-                                color="#FFFFFF"
+                        <OpenModalLink 
+                            text="Remove from your trips"
+                            handler={() => setVisible(true)}
                             />
-                            <DeleteText>Remove from your trips</DeleteText>
-                        </TouchableOpacity>
                 </ScrollView>
             </BackDrop>
             <Footer>

@@ -12,13 +12,20 @@ const ButtonGroup = styled.View`
     justify-content: space-between;
 `;
 
+const Container = styled.View`
+    flex: 1;
+    justify-content: space-around;
+    align-items: center;
+    padding: 30px;
+`;
+
 const AddTripScreen = ({navigation}) => {
     const [name, setName] = useState('');
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
 
     return (
-    <View style={styles.container}>
+    <Container>
         <Title title="Create your trip" />
         <UserInput 
             handler={setName}
@@ -44,17 +51,9 @@ const AddTripScreen = ({navigation}) => {
                 handler={() => navigation.navigate('Places', {name, startDate, endDate})} />
         </ButtonGroup>
     {/* </Footer> */}
-    </View>
+    </Container>
     )
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        padding: 30,
-    },
-})
 
 export default AddTripScreen;

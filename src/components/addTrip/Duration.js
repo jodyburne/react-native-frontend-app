@@ -49,7 +49,6 @@ const shadow = {
 }
 
 const Duration = ({startDate, endDate, changeStart, changeEnd, style}) => {
-    console.log(startDate)
     const [modalVisible, setModalVisible] = useState(false);
     const [date, setDate] = useState({
         start: false,

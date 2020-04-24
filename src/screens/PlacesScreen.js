@@ -49,7 +49,6 @@ const PlacesScreen = ({navigation}) => {
     };
 
     const handleDelete = id => {
-        console.log(id)
         const copy = [...places];
         const filtered = copy.filter(p => p.id !== id);
         setPlaces(filtered);

@@ -7,9 +7,9 @@ const TitleText = styled.Text`
     text-align: center;
 `;
 
-const Title = ({title}) => {
+const Title = ({title, style}) => {
     return (
-        <TitleText>{title}</TitleText>
+        <TitleText style={style}>{title}</TitleText>
     )
 };
 

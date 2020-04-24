@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/AntDesign';
-import Button from './ui/Button';
+import Button, {CancelButton} from './ui/Button';
 
 const ButtonGroup = styled.View`
     flex-direction: row;
@@ -48,24 +48,37 @@ const Footer = styled.View`
     justify-content: center;
 `;
 
-const CancelButton = styled.TouchableOpacity`
-    height: 48px;
-    width: 158px;
-    border-radius: 4px;
-    background-color: #FFFFFF;
+const LinkContainer = styled.TouchableOpacity`
+    flex-direction: row;
+    align-items: center; 
     justify-content: center;
-    border: 1px solid #0084FF;
+    margin: 15px;
 `;
 
-const CancelButtonText = styled.Text`
-    color: #0084FF;
-    font-size: 16px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    text-align: center;
+const DeleteText = styled.Text`
+    font-size: 12px;
+    text-decoration: underline;
+    margin-left: 5px;
 `;
 
-const DeleteModal = ({cancelHandler, removeHandler}) => {
+export const OpenModalLink = ({handler, text, color}) => {
+    return (
+        <LinkContainer
+        onPress={handler}
+        style={{}}>
+            <Icon 
+                name="delete"
+                size={25}
+                color={color || "#FFFFFF"}
+            />
+            <DeleteText
+                style={{color: color || "#FFFFFF" }}
+            >{text}</DeleteText>
+        </LinkContainer>
+    )
+}
+
+const DeleteModal = ({cancelHandler, removeHandler, title, mainText, smallPrint}) => {
 
     return (
 
@@ -78,20 +91,20 @@ const DeleteModal = ({cancelHandler, removeHandler}) => {
                         size={30}
                         color="#3D83FF"
                     />
-                    <HeaderText>Vietnam</HeaderText>
+                    <HeaderText>{title}</HeaderText>
                 </CenteredView>
                 <CenteredView style={{width: 260}}>
-                    <MainText>Are you sure you want to remove this Trip?</MainText>
+                    <MainText>{mainText}</MainText>
                 </CenteredView>
                 <CenteredView style={{width: 260}}>
-                    <SmallPrint>By removing your trip you are also removing the list of places related to it.</SmallPrint>
+                    <SmallPrint>{smallPrint}</SmallPrint>
                 </CenteredView>
                 </>
                 <Footer>
                     <ButtonGroup>
                         <CancelButton
-                            onPress={cancelHandler}>
-                            <CancelButtonText>Cancel</CancelButtonText>
+                            handler={cancelHandler}
+                            text="Cancel">
                         </CancelButton>
                         <Button 
                             handler={removeHandler}
