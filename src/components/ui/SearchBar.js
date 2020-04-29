@@ -22,6 +22,7 @@ const SearchInput = styled.TextInput`
     width: 210px;
     padding-left: 20px;
     font-size: 16px;
+    font-family: 'Heebo-Regular';
 `;
 
 const SearchBar = ({placeholder, handler, value, onSubmit}) => {

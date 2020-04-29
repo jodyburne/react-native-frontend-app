@@ -15,10 +15,10 @@ export const Item = styled.View`
 export const Content = styled.TextInput`
     flex: 1;
     font-size: 16px;
-    line-height: 21px;
     padding-left: 20px;
     padding-right: 20px;
     color: #40403D;
+    font-family: 'Heebo-Light';
 `;
 
 export const CrossContainer = styled.TouchableOpacity`
@@ -35,9 +35,10 @@ export const CrossContainer = styled.TouchableOpacity`
 `;
 
 
-const ListItem = ({value, handler, icon, style, placeholder, onChange, editable}) =>  (
+const ListItem = ({fontSize, value, handler, icon, style, placeholder, onChange, editable}) =>  (
         <Item style={{elevation: 4}}>
                 <Content 
+                    style={fontSize}
                     placeholder={placeholder}
                     value={value} 
                     autoCorrect={false}

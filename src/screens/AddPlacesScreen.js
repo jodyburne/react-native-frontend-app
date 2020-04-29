@@ -12,7 +12,7 @@ import {Label} from '../components/ui/UserInput';
 
 const TripName = styled.Text`
     font-size: 28px;
-    font-weight: bold;
+    font-family: 'Heebo-Bold';
     color: #40403D;
     text-align: center;
 `;
@@ -33,6 +33,7 @@ export const NoPlacesText = styled.Text`
     font-size: 18px;
     opacity: 0.53;
     color: #40403D;
+    font-family: 'Heebo-Light';
 `;
 
 const shadow = {
@@ -86,6 +87,7 @@ const AddPlacesScreen = ({navigation}) => {
                                 renderItem={({ item }) => { 
                                 return (
                                     <ListItem 
+                                        fontSize={{fontSize: 24}}
                                         icon="close"
                                         value={item.name}
                                         editable={false}

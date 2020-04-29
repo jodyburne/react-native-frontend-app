@@ -34,6 +34,12 @@ const Username = styled.Text`
     color: #3D83FF;
     font-size: 24px;
     margin-left: 20px;
+    font-family: 'Heebo-Light';
+`;
+
+const PlacesText = styled.Text`
+    font-family: 'Heebo-Regular';
+    font-size: 14px;
 `;
 
 const UsernameContainer = styled.View`
@@ -78,7 +84,7 @@ const MyProfileScreen = ({navigation}) => {
                                 size={30} />
                         </TouchableOpacity>
                     </TitleContainer>
-                        <Text>{places.substring(0, places.length - 2)}</Text>
+                        <PlacesText>{places.substring(0, places.length - 2)}</PlacesText>
                 </PlacesContainer> 
             </CentralContainer>
             <Footer>

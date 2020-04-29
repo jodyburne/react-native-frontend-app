@@ -16,7 +16,6 @@ import flyd from 'flyd';
 import merge from 'mergerino'
 import RootContext from './src/RootContext';
 import { setNavigator } from './src/navigationRef';
-import {GlobalStyle} from './src/StyledComponents';
 
 const { states, actions } = createApp(flyd, merge, initState);
 
@@ -32,7 +31,7 @@ const navigator = createStackNavigator({
       screen: MyProfileScreen,
       navigationOptions: {
         title: 'Profile',
-        headerLeft: null,
+        headerLeft: () => null,
         headerTitleAlign: 'center'
       }
     },
@@ -40,7 +39,7 @@ const navigator = createStackNavigator({
       screen: TripDetailScreen,
       navigationOptions: {
         title: 'My trips',
-        headerLeft: null,
+        headerLeft: () => null,
         headerTitleAlign: 'center'
       }
     },
@@ -48,7 +47,7 @@ const navigator = createStackNavigator({
       screen: PlacesBeenScreen,
       navigationOptions: {
         title: 'Places I\'ve been',
-        headerLeft: null,
+        headerLeft: () => null,
         headerTitleAlign: 'center'
       }
     },
@@ -56,7 +55,7 @@ const navigator = createStackNavigator({
       screen: AddTripScreen,
       navigationOptions: { 
         title: 'Add Trip',
-        headerLeft: null,
+        headerLeft: () => null,
         headerTitleAlign: 'center'
       }
     },       
@@ -64,7 +63,7 @@ const navigator = createStackNavigator({
       screen: AddPlacesScreen,
       navigationOptions: { 
         title: 'Add Trip',
-        headerLeft: null, 
+        headerLeft: () => null,
         headerTitleAlign: 'center'
       }
     },
@@ -72,7 +71,7 @@ const navigator = createStackNavigator({
       screen: ThingsToDoScreen,
       navigationOptions: ({navigation}) => ({
         title: navigation.state.params.name,
-        headerLeft: null,
+        headerLeft: () => null,
         headerTitleAlign: 'center'
       })
     },
@@ -80,7 +79,7 @@ const navigator = createStackNavigator({
       screen: CheckListScreen,
       navigationOptions: { 
         title: 'Check List',
-        headerLeft: null, 
+        headerLeft: () => null,
         headerTitleAlign: 'center'
     }}, 
   },{
@@ -100,7 +99,6 @@ const App = () => {
   }, [])
   return (
     <RootContext.Provider value={{state, actions}}>
-      <GlobalStyle />
       <AppNavigator ref={navigator => { setNavigator(navigator) }}/>
     </RootContext.Provider>
   )};

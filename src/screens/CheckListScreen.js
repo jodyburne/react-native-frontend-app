@@ -83,7 +83,7 @@ const CheckListScreen = ({navigation}) => {
                     <Icon 
                         name="clipboard-list"
                         size={30}
-                        style={{color: "#3D83FF", padding: 10}}
+                        style={{color: "#3D83FF", padding: 5}}
                     />
                     <SubHeadingText>Things To Remember</SubHeadingText>
                 </HeadingContainer>

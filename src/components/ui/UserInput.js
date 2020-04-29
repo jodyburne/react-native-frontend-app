@@ -8,16 +8,17 @@ export const Box = styled.TextInput`
     border: 1px solid #D8D8D8;
     border-radius: 4px;
     background-color: #FFFFFF;
-    font-size: 16px;
+    font-size: 14px;
     color: #40403D;
     opacity: 0.5;
     padding: 15px;
+    font-family: 'Heebo-Regular';
 `;
 
 export const Label = styled.Text`
     color: #40403D;
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 14px;
+    font-family: 'Heebo-Medium';
     margin-bottom: 5px;
 `;
 

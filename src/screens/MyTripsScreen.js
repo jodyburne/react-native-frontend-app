@@ -24,6 +24,7 @@ export const GradientImage = styled.Image`
 const Username = styled.Text`
     color: #3D83FF;
     font-size: 22px;
+    font-family: 'Heebo-Regular';
 `;
 
 const ProfileContainer = styled.View`
@@ -37,7 +38,8 @@ const ProfileContainer = styled.View`
 const ProfilePic = styled.Image`
     height: 60px;
     width: 60px;
-    border: 2px #FFFFFF;
+    border-width: 2px;
+    border-color:  #FFFFFF;
     border-radius: 30px;
     margin-right: 10px;
 `;
@@ -60,7 +62,11 @@ const MyTripsScreen = ({navigation}) => {
                     <TouchableOpacity onPress={()  => navigation.navigate('MyProfile')}>
                         <ProfilePic source={require('../assets/User_Review_3.jpg')}/>
                     </TouchableOpacity>
-                    {user && <Username style={shadow}>{user.name}</Username>}
+                    {user && 
+                        <Username 
+                            style={shadow}
+                            >{user.name}
+                        </Username>}
                 </ProfileContainer>
                 <TripsCard />
             </Container>

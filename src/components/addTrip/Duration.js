@@ -35,6 +35,11 @@ const DaysContainer = styled.View`
     align-items: center;
 `;
 
+const DaysText = styled.Text`
+    font-family: 'Heebo-Medium';
+    font-size: 18px;
+`;
+
 const shadow = {
     shadowColor: "#000",
     shadowOffset: {
@@ -84,11 +89,11 @@ const Duration = ({startDate, endDate, changeStart, changeEnd, style}) => {
                 value={moment(startDate).format('L')}
             />
             <DaysContainer>
-                <Text style={{color: '#FFFFFF', fontSize: 18}}>{calcTripLength(startDate, endDate)}</Text>
-                <Text style={{color: '#FFFFFF'}}>days</Text>
+                <DaysText style={{color: '#FFFFFF'}}>{calcTripLength(startDate, endDate)}</DaysText>
+                <DaysText style={{color: '#FFFFFF', fontSize: 14}}>days</DaysText>
                 <Icon style={{color: '#3D83FF'}} size={25} name="long-arrow-right"/>
             </DaysContainer>
-                <DatePickerContainer 
+            <DatePickerContainer 
                 header="Ending"
                 value={moment(endDate).format('L')}
             />
@@ -137,16 +142,18 @@ const Duration = ({startDate, endDate, changeStart, changeEnd, style}) => {
                     onPress={() => {
                     setModalVisible(true);
                     setDate({...date, start: true});
-                    }}
-                >
+                    }}>
                     <DatePickerContainer 
                         value={date.startValue}
                         header="Starting"/>
                 </TouchableHighlight>
                 <DaysContainer>
-                    <Text style={{fontSize: 18}}>{calcTripLength(startDate, endDate)}</Text>
-                    <Text>days</Text>
-                    <Icon style={{color: '#3D83FF'}} size={25} name="long-arrow-right"/>
+                    <DaysText>{calcTripLength(startDate, endDate)}</DaysText>
+                    <DaysText style={{fontSize: 14}}>days</DaysText>
+                    <Icon 
+                        style={{color: '#3D83FF'}} 
+                        size={25} 
+                        name="long-arrow-right"/>
                 </DaysContainer>
                 <TouchableHighlight
                     onPress={() => {

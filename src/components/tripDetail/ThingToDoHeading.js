@@ -20,9 +20,9 @@ const TextContainer = styled.View`
 `;
 
 export const SubHeadingText = styled.Text`
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 14px;
     margin-left: 10px;
+    font-family: 'Heebo-Medium';
 `;
 
 const ThingToDoHeading = ({state, handler, icon, text}) => (

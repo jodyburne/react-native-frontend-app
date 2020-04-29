@@ -61,11 +61,12 @@ const PlacesBeenScreen = ({navigation}) => {
                     {places.length > 0 ?
                         <FlatList
                             data={places}
-                            keyExtractor={item => item.id}
+                            keyExtractor={item => String(item.id)}
                             renderItem={({ item }) => { 
                             return (
                                 <ListItem 
                                     icon="close"
+                                    fontSize={{fontSize: 24}}
                                     value={item.name}
                                     editable={false}
                                     handler={() => handleDelete(item.id)}

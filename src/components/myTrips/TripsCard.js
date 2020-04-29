@@ -19,13 +19,14 @@ const TripHeader = styled.Text`
     margin-bottom: 10px;
     color: #40403D;
     font-size: 14px;
-    font-weight: bold;
+    font-family: 'Heebo-Medium';    
 `;
 
 const NoTripsText = styled.Text`
     opacity: 0.53;
     color: #40403D;
     font-size: 18px;
+    font-family: 'Heebo-Light';
 `;
 
 
@@ -42,6 +43,7 @@ const TripContainer = styled.ImageBackground`
 const TripName = styled.Text`
     color: #FFFFFF;
     font-size: 24px;
+    font-family: 'Heebo-Light';
 `;
 
 const GlobeImage = styled.Image`
@@ -67,7 +69,7 @@ const TripsCard = () => {
              return (
                 <FlatList
                     data={trips}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => String(item.id)}
                     renderItem={({ item }) => { 
                   return (
                     <View >

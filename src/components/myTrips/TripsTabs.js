@@ -27,12 +27,14 @@ const LeftText = styled.Text`
     color: #40403D;
     font-size: 14px;
     text-align: center;
+    font-family: 'Heebo-Regular';
 `;
 
 const RightText = styled.Text`
     color: #40403D;
     font-size: 14px;
     text-align: center;
+    font-family: 'Heebo-Regular';
 `;
 
 

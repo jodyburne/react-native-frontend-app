@@ -41,12 +41,13 @@ const BackDrop = styled.ImageBackground`
 const LinkText = styled.Text`
     color: #40403D;
     font-size: 12px;
+    font-family: 'Heebo-Regular';
 `;
 
 const Label = styled.Text`
     color: #FFFFFF;
     font-size: 16px;
-    font-weight: bold;
+    font-family: 'Heebo-Medium';
     margin-bottom: 10px;
     margin-left: 5px;
     margin-top: 25px;
@@ -55,12 +56,17 @@ const Label = styled.Text`
 const Header = styled.Text`
     color: #FFFFFF;
     font-size: 32px;
-    font-weight: bold;
+    font-family: 'Heebo-Bold';
     text-align: center;
-    margin-top: 60px;
+    margin-top: 100px;
     margin-bottom: 30px;
 `;
 
+const NoPlaces = styled.Text`
+    color: #FFFFFF;
+    font-family: 'Heebo-Regular';
+    font-size: 16px;
+`;
 
 const TripDetailScreen = ({navigation}) => {
     const [visible, setVisible] = useState(false);
@@ -101,10 +107,11 @@ const TripDetailScreen = ({navigation}) => {
                             {trip.places.length > 0 ?
                                 <FlatList
                                     data={trip.places}
-                                    keyExtractor={item => item.id}
+                                    keyExtractor={item => String(item.id)}
                                     renderItem={({ item }) => { 
                                     return (
                                         <ListItem 
+                                            fontSize={{fontSize: 24}}
                                             icon="right"
                                             value={item.name}
                                             editable={false}
@@ -112,7 +119,7 @@ const TripDetailScreen = ({navigation}) => {
                                         />
                                     )}} />
                                 :  
-                                    <Text style={{color: '#FFFFFF'}}>You don't have any places for this trip</Text>
+                                    <NoPlaces>You don't have any places for this trip</NoPlaces>
                             }
                         </View>
                         <Label>Organise your trip</Label>

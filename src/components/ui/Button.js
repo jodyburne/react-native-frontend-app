@@ -13,9 +13,9 @@ const CancelButtonContainer = styled.TouchableOpacity`
 const CancelButtonText = styled.Text`
     color: #0084FF;
     font-size: 16px;
-    font-weight: bold;
     letter-spacing: 1px;
     text-align: center;
+    font-family: 'Heebo-Medium';
 `;
 
 const ButtonContainer = styled.TouchableOpacity`
@@ -29,9 +29,9 @@ const ButtonContainer = styled.TouchableOpacity`
 const ButtonText = styled.Text`
     color: #FFFFFF;
     font-size: 16px;
-    font-weight: bold;
     letter-spacing: 1px;
     text-align: center;
+    font-family: 'Heebo-Medium';
 `;
 
 const ButtonGroupContainer = styled.View`
@@ -51,7 +51,7 @@ const DisabledButtonContainer = styled.TouchableOpacity`
 const DisabledButtonText = styled.Text`
     color: rgba(0,0,0,0.34);
     font-size: 16px;
-    font-weight: bold;
+    font-family: 'Heebo-Medium';
     letter-spacing: 1px;
     text-align: center;
 `;

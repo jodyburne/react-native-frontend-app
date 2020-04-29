@@ -25,19 +25,21 @@ const ModalView = styled.View`
 const HeaderText = styled.Text`
     color: #40403D;
     font-size: 22px;
-    font-weight: bold;
+    font-family: 'Heebo-Medium';
 `;
 
 const MainText = styled.Text`
     color: #40403D;
     font-size: 18px;
     text-align: center;
+    font-family: 'Heebo-Light';
 `;
 
 const SmallPrint = styled.Text`
     color: #40403D;
     font-size: 12px;
     text-align: center;
+    font-family: 'Heebo-Regular';
 `;
 
 const Footer = styled.View`
@@ -59,6 +61,7 @@ const DeleteText = styled.Text`
     font-size: 12px;
     text-decoration: underline;
     margin-left: 5px;
+    font-family: 'Heebo-Regular';
 `;
 
 export const OpenModalLink = ({handler, text, color}) => {
