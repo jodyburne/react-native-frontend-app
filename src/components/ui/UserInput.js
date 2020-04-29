@@ -5,7 +5,7 @@ import {View} from 'react-native';
 export const Box = styled.TextInput`
     height: 50px;
     width: 315px;
-    border: 1px solid #E5E5E5;
+    border: 1px solid #D8D8D8;
     border-radius: 4px;
     background-color: #FFFFFF;
     font-size: 16px;
@@ -21,11 +21,9 @@ export const Label = styled.Text`
     margin-bottom: 5px;
 `;
 
-
-
 const UserInput = ({placeholder, handler, value, label}) => {
     return (
-        <View>
+        <View >
             {label && <Label>{label}</Label> }
             <Box 
                 placeholder={placeholder}

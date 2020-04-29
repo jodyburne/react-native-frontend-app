@@ -1,37 +1,79 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import { TouchableOpacity, Dimensions, SafeAreaView } from 'react-native';
 import styled from 'styled-components';
-import TripsCard from '../components/myTrips/TripsCard'
-import Button from '../components/ui/Button';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import TripsCard from '../components/myTrips/TripsCard';
+import Button, {ButtonGroup} from '../components/ui/Button';
+import Footer from '../components/ui/Footer';
+import RootContext from '../RootContext';
 
-const ButtonGroup = styled.View`
-    flex-direction: row;
+const Container = styled.View`
+    margin-top: 20px;
+    align-items: center;
     justify-content: space-between;
 `;
 
-const Container = styled.View`
-    flex: 1;
-    justify-content: space-around;
-    align-items: center;
+export const GradientImage = styled.Image`
+    width: ${Dimensions.get('window').width}px;
+    height: 225px;
+    z-index: -1;
+    position: absolute;
+    left: 0px;
+    top: 0px;
 `;
 
+const Username = styled.Text`
+    color: #3D83FF;
+    font-size: 22px;
+`;
+
+const ProfileContainer = styled.View`
+    flex-direction: row;
+    margin-bottom: 10px;
+    align-items: center;
+    padding: 10px;
+    width: 345px;
+`;
+
+const ProfilePic = styled.Image`
+    height: 60px;
+    width: 60px;
+    border: 2px #FFFFFF;
+    border-radius: 30px;
+    margin-right: 10px;
+`;
+
+const shadow = {
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10
+};
+
 const MyTripsScreen = ({navigation}) => {
+    const { state: {user} } = useContext(RootContext);
+
     return (
-        <Container>
-            <TouchableOpacity onPress={()  => navigation.navigate('MyProfile')}>
-                <Icon name="account" size={25} />
-            </TouchableOpacity>
-            <TripsCard />
-            <ButtonGroup>
-                <Button style={{marginRight: 4}} buttonText="Find Brighters" />
-                <Button 
-                    style={{marginLeft: 4}}
-                    buttonText="Create Trip"
-                    handler={() => navigation.navigate('AddTrip')} />
-            </ButtonGroup>
-        </Container>
+        <SafeAreaView style={{flex: 1, justifyContent: 'space-between'}}>
+            <GradientImage
+                source={require('../assets/Rectangle.png')} />
+            <Container>
+                <ProfileContainer>
+                    <TouchableOpacity onPress={()  => navigation.navigate('MyProfile')}>
+                        <ProfilePic source={require('../assets/User_Review_3.jpg')}/>
+                    </TouchableOpacity>
+                    {user && <Username style={shadow}>{user.name}</Username>}
+                </ProfileContainer>
+                <TripsCard />
+            </Container>
+            <Footer >
+                <ButtonGroup>
+                    <Button 
+                        style={{width: 360}}
+                        buttonText="Create Trip"
+                        handler={() => navigation.navigate('AddTrip')} />
+                </ButtonGroup>
+            </Footer>
+        </SafeAreaView>
     );
-}
+};
 
 export default MyTripsScreen;

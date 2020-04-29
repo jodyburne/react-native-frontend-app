@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const CancelButtonContainer = styled.TouchableOpacity`
     height: 48px;
-    width: 158px;
+    width: 176px;
     border-radius: 4px;
     background-color: #FFFFFF;
     justify-content: center;
@@ -31,9 +31,7 @@ const ButtonText = styled.Text`
     font-size: 16px;
     font-weight: bold;
     letter-spacing: 1px;
-    line-height: 22px;
     text-align: center;
-    height: 22px;
 `;
 
 const ButtonGroupContainer = styled.View`
@@ -42,17 +40,39 @@ const ButtonGroupContainer = styled.View`
     justify-content: space-around;
 `;
 
+const DisabledButtonContainer = styled.TouchableOpacity`
+    height: 48px;
+    width: 176px;
+    border-radius: 4px;
+    background-color: rgba(0,0,0,0.06);
+    justify-content: center;
+`;
+
+const DisabledButtonText = styled.Text`
+    color: rgba(0,0,0,0.34);
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-align: center;
+`;
+
 export const ButtonGroup = ({children}) => (
     <ButtonGroupContainer>
         {children}
     </ButtonGroupContainer>
 );
 
-export const CancelButton = ({handler, text, style}) => (
+export const DisabledButton = ({buttonText, style}) => (
+    <DisabledButtonContainer style={style}>
+        <DisabledButtonText>{buttonText}</DisabledButtonText>
+    </DisabledButtonContainer>
+)
+
+export const CancelButton = ({handler, buttonText, style}) => (
     <CancelButtonContainer
         style={{...style}}
         onPress={handler}>
-        <CancelButtonText>{text}</CancelButtonText>
+        <CancelButtonText>{buttonText}</CancelButtonText>
     </CancelButtonContainer>
 );
 

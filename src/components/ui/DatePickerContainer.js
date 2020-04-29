@@ -32,12 +32,10 @@ const HeaderText = styled.Text`
 
 const DatePickerContainer = ({header, value}) => {
     return (
-        <>
             <Box>
                 <HeaderText>{header}</HeaderText>
                 <Content><Text>{value}</Text></Content>  
             </Box>
-        </>
     )
 };
 

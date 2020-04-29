@@ -1,13 +1,12 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {View, Modal, SafeAreaView, ScrollView} from 'react-native';
-import styled from 'styled-components';
 import RootContext from '../RootContext';
 import Button, {CancelButton, ButtonGroup} from '../components/ui/Button';
 import Title from '../components/ui/Title';
-import DeleteModal, {OpenModalLink} from '../components/DeleteModal';
-import ThingToDo from '../components/ThingToDo';
+import DeleteModal, {OpenModalLink} from '../components/tripDetail/DeleteModal';
+import ThingToDo from '../components/tripDetail/ThingToDo';
 import Footer from '../components/ui/Footer';
-import ThingToDoHeading from '../components/ThingToDoHeading';
+import ThingToDoHeading from '../components/tripDetail/ThingToDoHeading';
 
 const ThingToDoScreen = ({navigation}) => {
 
@@ -142,7 +141,7 @@ const ThingToDoScreen = ({navigation}) => {
             <Footer>
                 <ButtonGroup>
                     <CancelButton 
-                        text="Back"
+                        buttonText="Back"
                         handler={() => navigation.navigate('TripDetail', { trip })}
                     />
                     <Button 

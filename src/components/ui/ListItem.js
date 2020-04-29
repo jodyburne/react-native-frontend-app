@@ -57,4 +57,4 @@ const ListItem = ({value, handler, icon, style, placeholder, onChange, editable}
 
 export default ListItem;
 
-// poss right, close, plus
+// poss icon names right, close, plus

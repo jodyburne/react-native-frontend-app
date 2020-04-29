@@ -1,13 +1,26 @@
 import React, {useState, useContext, useEffect} from 'react';
-import {Text, View, StyleSheet, FlatList, SafeAreaView, ScrollView, Dimensions} from 'react-native';
+import {View, FlatList, SafeAreaView, ScrollView} from 'react-native';
 import styled from 'styled-components';
 import Button from '../components/ui/Button';
 import RootContext from '../RootContext';
-import { getId } from '../App';
+import {getId} from '../App';
 import CheckListItem from '../components/ui/CheckListItem';
 import ListItem from '../components/ui/ListItem';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Footer from '../components/ui/Footer';
+import Title from '../components/ui/Title';
+import {SubHeadingText} from '../components/tripDetail/ThingToDoHeading';
+
+const HeadingContainer = styled.View`
+    flex-direction: row;
+    margin-left: 30px;
+    margin-bottom: 10px;
+    align-items: center;
+`;
+
+const CenteredView = styled.View`
+    align-items: center;
+`;
 
 const CheckListScreen = ({navigation}) => {
     const [ listItem, setListItem ] = useState('');
@@ -24,9 +37,8 @@ const CheckListScreen = ({navigation}) => {
             initState[element.id] = element.completed
         });
         }
-        setChecked(initState)
+        setChecked(initState);
     }, []);
-
 
     const tripCopy = {...trip };
     
@@ -40,41 +52,42 @@ const CheckListScreen = ({navigation}) => {
         const copy = {...checked};
         copy[id] = false;
         setChecked(copy);
-    }
+    };
 
     const handleSelect = id => {
         const copy = {...checked};
         copy[id] = !checked[id];
         setChecked(copy);
-    }
+    };
 
 
     const deleteItem = item => {
         const index = trip.checkList.indexOf(item);
         tripCopy.checkList.splice(index, 1);
         actions.editTrip(tripCopy);
-    }
+    };
 
     const saveChanges = () => {
         tripCopy.checkList.map(c => c.completed = checked[c.id])
         actions.editTrip(tripCopy);
-        navigation.navigate('TripDetail', {trip})
-    }
-
+        navigation.navigate('TripDetail', {trip});
+    };
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView>
-            <Text style={styles.title}>Trip Essentials</Text>
-                <View style={styles.heading}>
+                <Title 
+                    title="Trip Essentials" 
+                    style={{padding: 25}}/>
+                <HeadingContainer>
                     <Icon 
                         name="clipboard-list"
                         size={30}
-                        style={styles.icon}
+                        style={{color: "#3D83FF", padding: 10}}
                     />
-                    <Text style={styles.headingText}>Things To Remember</Text>
-                </View>
-                <View style={styles.container}>
+                    <SubHeadingText>Things To Remember</SubHeadingText>
+                </HeadingContainer>
+                <CenteredView>
                     <FlatList
                         data={trip.checkList}
                         keyExtractor={(item) => item.id}
@@ -98,45 +111,17 @@ const CheckListScreen = ({navigation}) => {
                         onChange={setListItem}
                         handler={addItem}
                     />
-                </View>
-                </ScrollView>
-                <Footer>
-                    <Button
-                        buttonText="Done" 
-                        handler={saveChanges}
-                        style={{width: 360, margin: 10}}
-                    />
-                </Footer>
-            </SafeAreaView>
+                </CenteredView>
+            </ScrollView>
+            <Footer>
+                <Button
+                    buttonText="Done" 
+                    handler={saveChanges}
+                    style={{width: 360}}
+                />
+            </Footer>
+        </SafeAreaView>
     );
-
 };
-
-const styles = StyleSheet.create({
-    title: {
-        color: '#40403D',
-        fontSize: 20,
-        padding: 25,
-        textAlign: 'center'
-    },
-    container: {
-        alignItems: 'center',
-    },
-    heading: {
-        flexDirection: 'row',
-        marginLeft: 30,
-        marginBottom: 10,
-        alignItems: 'center',
-    },
-    headingText: {
-        fontWeight: 'bold',
-        fontSize: 16
-    },
-    icon: {
-        padding: 10,
-        color: "#3D83FF"
-    },
-})
-
 
 export default CheckListScreen;

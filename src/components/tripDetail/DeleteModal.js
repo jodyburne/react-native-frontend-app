@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/AntDesign';
-import Button, {CancelButton} from './ui/Button';
+import Button, {CancelButton} from '../ui/Button';
 
 const ButtonGroup = styled.View`
     flex-direction: row;
@@ -76,12 +76,11 @@ export const OpenModalLink = ({handler, text, color}) => {
             >{text}</DeleteText>
         </LinkContainer>
     )
-}
+};
 
 const DeleteModal = ({cancelHandler, removeHandler, title, mainText, smallPrint}) => {
 
     return (
-
         <CenteredView>
             <ModalView>
                 <>
@@ -104,7 +103,7 @@ const DeleteModal = ({cancelHandler, removeHandler, title, mainText, smallPrint}
                     <ButtonGroup>
                         <CancelButton
                             handler={cancelHandler}
-                            text="Cancel">
+                            buttonText="Cancel">
                         </CancelButton>
                         <Button 
                             handler={removeHandler}

@@ -1,9 +1,9 @@
 import React, {useContext, useState, useEffect} from 'react';
 import {View, FlatList} from 'react-native'
-import RootContext from '../RootContext';
-import {getId} from '../App';
-import CheckListItem from './ui/CheckListItem';
-import ListItem from './ui/ListItem';
+import RootContext from '../../RootContext';
+import {getId} from '../../App';
+import CheckListItem from '../ui/CheckListItem';
+import ListItem from '../ui/ListItem';
 
 const ThingToDo = ({data, placeIndex, tripCopy, thingToDo, state, callback}) => {
     const { actions } = useContext(RootContext);
@@ -43,13 +43,13 @@ const ThingToDo = ({data, placeIndex, tripCopy, thingToDo, state, callback}) => 
             tripCopy.places[placeIndex].thingsToDo[thingToDo].push({name: state, completed: false, id});
             actions.editTrip(tripCopy);
             callback('');
-    }
+    };
 
     const handleSelect = (thingToDo, id) => {
         const copy = {...checked};
         copy[thingToDo][id] = !checked[thingToDo][id];
         setChecked(copy);
-    }
+    };
 
     return (
         <View style={{alignItems: 'center', padding: 15, backgroundColor: '#FFFFFF'}}>

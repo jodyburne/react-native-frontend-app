@@ -3,14 +3,9 @@ import DatePicker from 'react-native-date-picker';
 import styled from 'styled-components';
 import DatePickerContainer from '../../components/ui/DatePickerContainer';
 import Button from '../../components/ui/Button';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
-import {
-    Modal,
-    Text,
-    TouchableHighlight,
-    View
-  } from "react-native";
+import {Modal, Text, TouchableHighlight} from "react-native";
 
 const Container = styled.View`
     flex-direction: row;
@@ -36,6 +31,9 @@ const ModalView = styled.View`
     height: 240px;
 `;
 
+const DaysContainer = styled.View`
+    align-items: center;
+`;
 
 const shadow = {
     shadowColor: "#000",
@@ -46,7 +44,7 @@ const shadow = {
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5
-}
+};
 
 const Duration = ({startDate, endDate, changeStart, changeEnd, style}) => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -77,7 +75,7 @@ const Duration = ({startDate, endDate, changeStart, changeEnd, style}) => {
                 endValue: moment(endDate).format('L'),
                 end: false,
             });           
-    }
+    };
 
     const renderDisabledDuration = () => (
         <Container style={style}>
@@ -85,11 +83,12 @@ const Duration = ({startDate, endDate, changeStart, changeEnd, style}) => {
                 header="Starting"
                 value={moment(startDate).format('L')}
             />
-        <View style={{marginTop: 10}}>
-            <Text style={{color: '#FFFFFF', fontSize: 20, textAlign: 'center', fontWeight: 'bold'}}>{calcTripLength(startDate, endDate)}</Text>
-            <Text style={{color: '#FFFFFF'}}>days</Text>
-        </View>
-            <DatePickerContainer 
+            <DaysContainer>
+                <Text style={{color: '#FFFFFF', fontSize: 18}}>{calcTripLength(startDate, endDate)}</Text>
+                <Text style={{color: '#FFFFFF'}}>days</Text>
+                <Icon style={{color: '#3D83FF'}} size={25} name="long-arrow-right"/>
+            </DaysContainer>
+                <DatePickerContainer 
                 header="Ending"
                 value={moment(endDate).format('L')}
             />
@@ -125,17 +124,18 @@ const Duration = ({startDate, endDate, changeStart, changeEnd, style}) => {
                                 style={{width: 80}}
                                 buttonText="Done"
                                 handler={() => {
-                                    handleDateChange()
+                                    handleDateChange();
                                     setModalVisible(!modalVisible);
                             }}/>
                         </ModalView>
 
                     </CenteredView>
                 </Modal>
+                
                 <Container>
                 <TouchableHighlight
                     onPress={() => {
-                    setModalVisible(true)
+                    setModalVisible(true);
                     setDate({...date, start: true});
                     }}
                 >
@@ -143,10 +143,11 @@ const Duration = ({startDate, endDate, changeStart, changeEnd, style}) => {
                         value={date.startValue}
                         header="Starting"/>
                 </TouchableHighlight>
-                <View>
-                    <Text style={{fontSize: 18, textAlign: 'center'}}>{calcTripLength(startDate, endDate)}</Text>
+                <DaysContainer>
+                    <Text style={{fontSize: 18}}>{calcTripLength(startDate, endDate)}</Text>
                     <Text>days</Text>
-                </View>
+                    <Icon style={{color: '#3D83FF'}} size={25} name="long-arrow-right"/>
+                </DaysContainer>
                 <TouchableHighlight
                     onPress={() => {
                     setModalVisible(true);

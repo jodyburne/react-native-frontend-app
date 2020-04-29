@@ -9,7 +9,8 @@ const Container = styled.View`
     display: flex;
     align-items: center;
     padding: 5px;
-    `;
+    background-color: #FFFFFF;
+`;
 
 const Footer = ({children, style}) => {
     return <Container style={style}>{children}</Container>

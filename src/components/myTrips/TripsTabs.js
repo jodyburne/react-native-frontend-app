@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const LeftTab = styled.TouchableOpacity`
     height: 70px;
@@ -7,8 +8,7 @@ const LeftTab = styled.TouchableOpacity`
     opacity: 0.9;
     border-top-left-radius: 6px;
     background-color: #FFFFFF;
-
-    /* box-shadow: inset 1px 0 1px 0 rgba(0,0,0,0.06) */
+    flex-direction: row;
     align-items: center;
     justify-content: center;
 `;
@@ -17,7 +17,7 @@ const RightTab = styled.TouchableOpacity`
     width: 172px;
     border-top-right-radius: 6px;
     background-color: #FFFFFF;
-    /* box-shadow: inset 1px 0 1px 0 rgba(0,0,0,0.06) */    
+    flex-direction: row;
     align-items: center;
     justify-content: center;
 `;
@@ -25,19 +25,13 @@ const RightTab = styled.TouchableOpacity`
 const LeftText = styled.Text`
     opacity: 0.5;
     color: #40403D;
-    font-family: Heebo;
     font-size: 14px;
-    letter-spacing: 0;
-    line-height: 21px;
     text-align: center;
 `;
 
 const RightText = styled.Text`
     color: #40403D;
-    font-family: Heebo;
     font-size: 14px;
-    letter-spacing: 0;
-    line-height: 21px;
     text-align: center;
 `;
 
@@ -49,9 +43,20 @@ const Container = styled.View`
 const TripsTabs = () => (
     <Container>
         <LeftTab>
+            <Icon
+                name="airplane-landing"
+                size={30}
+                style={{color: '#3D83FF', 
+                    marginRight: 5, 
+                    opacity: 0.5}} />
             <LeftText>Trips I did</LeftText>
         </LeftTab>
         <RightTab>
+            <Icon
+                name="airplane-takeoff"
+                size={30}
+                style={{color: '#3D83FF', 
+                    marginRight: 5}} />
             <RightText>Trips I'm doing</RightText>
         </RightTab>
     </Container>

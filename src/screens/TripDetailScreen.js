@@ -1,11 +1,11 @@
 import React, {useContext, useState} from 'react';
-import {Text, View, FlatList, TouchableOpacity, Modal, ImageBackground, Dimensions, SafeAreaView, ScrollView} from 'react-native';
+import {Text, View, FlatList, TouchableOpacity, Modal, SafeAreaView, ScrollView} from 'react-native';
 import RootContext from '../RootContext';
 import Duration from '../components/addTrip/Duration';
 import ListItem from '../components/ui/ListItem';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import DeleteModal, {OpenModalLink} from '../components/DeleteModal';
+import DeleteModal, {OpenModalLink} from '../components/tripDetail/DeleteModal';
 import Footer from '../components/ui/Footer';
 import Button from '../components/ui/Button';
 
@@ -33,14 +33,9 @@ const Lower = styled.View`
     justify-content:center;
 `;
 
-const ButtonGroup = styled.View`
-    flex-direction: row;
-`;
-
 const BackDrop = styled.ImageBackground`
     flex: 1;
     align-items: center;
-    background: rgba(0,0,255, 0.5);
 `;
 
 const LinkText = styled.Text`
@@ -113,7 +108,7 @@ const TripDetailScreen = ({navigation}) => {
                                             icon="right"
                                             value={item.name}
                                             editable={false}
-                                            handler={() => navigation.navigate('ThingsToDo', {tripId: trip.id, placeId: item.id})}
+                                            handler={() => navigation.navigate('ThingsToDo', {tripId: trip.id, placeId: item.id, name: item.name})}
                                         />
                                     )}} />
                                 :  
@@ -143,13 +138,10 @@ const TripDetailScreen = ({navigation}) => {
                 </ScrollView>
             </BackDrop>
             <Footer>
-                <ButtonGroup>
-                    <Button style={{marginRight: 10}} buttonText="Edit"/>
-                    <Button 
-                        handler={() => navigation.navigate('MyTrips')}
-                        style={{marginLeft: 10}} 
-                        buttonText="Done"/>
-                </ButtonGroup>
+                <Button 
+                    style={{width: 360}}
+                    handler={() => navigation.navigate('MyTrips')}
+                    buttonText="Done"/>
             </Footer>
         </SafeAreaView>
     );

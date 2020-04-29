@@ -19,7 +19,7 @@ const TextContainer = styled.View`
     flex-direction: row;
 `;
 
-const SubHeadingText = styled.Text`
+export const SubHeadingText = styled.Text`
     font-size: 16px;
     font-weight: bold;
     margin-left: 10px;
