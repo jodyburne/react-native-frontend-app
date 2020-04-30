@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react';
-import {Modal, SafeAreaView, ScrollView} from 'react-native';
+import {Modal, ScrollView} from 'react-native';
 import styled from 'styled-components';
 import RootContext from '../RootContext';
 import Button, {CancelButton, ButtonGroup} from '../components/ui/Button';
@@ -9,10 +9,15 @@ import ThingToDo from '../components/tripDetail/ThingToDo';
 import Footer from '../components/ui/Footer';
 import ThingToDoHeading from '../components/tripDetail/ThingToDoHeading';
 
-const Container = styled.View`
+const Container = styled.SafeAreaView`
     background-color: #FFFFFF;
     flex: 1;
-    justify-content: space-between;
+`;
+
+const TitleContainer = styled.View`
+    height: 90px;
+    justify-content: center;
+    background-color: #f0f0f0;
 `;
 
 const ThingToDoScreen = ({navigation}) => {
@@ -51,12 +56,13 @@ const ThingToDoScreen = ({navigation}) => {
     };
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <Title 
-                style={{padding: 50}}
-                title="Things I'm going to do"/>
+        <Container>
             {place &&
-                <Container>
+                <ScrollView>
+                    <TitleContainer>
+                        <Title 
+                            title="Things I'm going to do"/>
+                    </TitleContainer>
                     <Modal 
                         animationType="slide"
                         //transparent={true}
@@ -72,79 +78,77 @@ const ThingToDoScreen = ({navigation}) => {
                             }}
                         />
                         </Modal>
-                    <ScrollView>
-                        <ThingToDoHeading 
-                            state={show.restaurants}
-                            handler={() => {
-                                setShow({...show, restaurants: !show.restaurants})}}
-                            icon="utensils"
-                            text="Restaurants"
-                        />
-                        {show.restaurants && 
-                            <ThingToDo 
-                                data={data}
-                                placeIndex={placeIndex}
-                                tripCopy={tripCopy}
-                                thingToDo='restaurants'
-                                state={resto}
-                                callback={setResto}
-                            />  }
-                        <ThingToDoHeading 
-                            state={show.hotels}
-                            handler={() => {
-                                setShow({...show, hotels: !show.hotels})}}
-                            icon="hotel"
-                            text="Hotels"
-                        />
-                        {show.hotels && 
-                            <ThingToDo 
-                                data={data}
-                                placeIndex={placeIndex}
-                                tripCopy={tripCopy}
-                                thingToDo="hotels"
-                                state={hotel}
-                                callback={setHotel}
-                            />  }
-                        <ThingToDoHeading 
-                            state={show.attractions}
-                            handler={() => {
-                                setShow({...show, attractions: !show.attractions})}}
-                            icon="fort-awesome"
-                            text="Attractions"
-                        />
-                        {show.attractions && 
-                            <ThingToDo 
+                    <ThingToDoHeading 
+                        state={show.restaurants}
+                        handler={() => {
+                            setShow({...show, restaurants: !show.restaurants})}}
+                        icon="utensils"
+                        text="Restaurants"
+                    />
+                    {show.restaurants && 
+                        <ThingToDo 
                             data={data}
                             placeIndex={placeIndex}
                             tripCopy={tripCopy}
-                            thingToDo="attractions"
-                            state={attraction}
-                            callback={setAttraction}
-                        />  }    
-                        <ThingToDoHeading 
-                            state={show.others}
-                            handler={() => {
-                                setShow({...show, others: !show.others})}}
-                            icon="compass"
-                            text="Other"
-                        />  
-                        {show.others && 
-                            <ThingToDo 
-                                data={data}
-                                placeIndex={placeIndex}
-                                tripCopy={tripCopy}
-                                thingToDo="others"
-                                state={other}
-                                callback={setOther}
-                            />  }   
-                    </ScrollView>
-                    <OpenModalLink 
-                        text="Remove place from trip"
-                        handler={() => setVisible(true)}
-                        color="#40403D"
+                            thingToDo='restaurants'
+                            state={resto}
+                            callback={setResto}
+                        />  }
+                    <ThingToDoHeading 
+                        state={show.hotels}
+                        handler={() => {
+                            setShow({...show, hotels: !show.hotels})}}
+                        icon="hotel"
+                        text="Hotels"
                     />
-                </Container> 
+                    {show.hotels && 
+                        <ThingToDo 
+                            data={data}
+                            placeIndex={placeIndex}
+                            tripCopy={tripCopy}
+                            thingToDo="hotels"
+                            state={hotel}
+                            callback={setHotel}
+                        />  }
+                    <ThingToDoHeading 
+                        state={show.attractions}
+                        handler={() => {
+                            setShow({...show, attractions: !show.attractions})}}
+                        icon="fort-awesome"
+                        text="Attractions"
+                    />
+                    {show.attractions && 
+                        <ThingToDo 
+                        data={data}
+                        placeIndex={placeIndex}
+                        tripCopy={tripCopy}
+                        thingToDo="attractions"
+                        state={attraction}
+                        callback={setAttraction}
+                    />  }    
+                    <ThingToDoHeading 
+                        state={show.others}
+                        handler={() => {
+                            setShow({...show, others: !show.others})}}
+                        icon="compass"
+                        text="Other"
+                    />  
+                    {show.others && 
+                        <ThingToDo 
+                            data={data}
+                            placeIndex={placeIndex}
+                            tripCopy={tripCopy}
+                            thingToDo="others"
+                            state={other}
+                            callback={setOther}
+                        />  }   
+                </ScrollView>
             }
+            <OpenModalLink 
+                text="Remove place from trip"
+                handler={() => setVisible(true)}
+                color="#40403D"
+                />
             <Footer>
                 <ButtonGroup>
                     <CancelButton 
@@ -156,7 +160,7 @@ const ThingToDoScreen = ({navigation}) => {
                         handler={() => navigation.navigate('MyTrips')}/>
                 </ButtonGroup>
             </Footer>
-        </SafeAreaView>
+        </Container>
     );
 };
 
