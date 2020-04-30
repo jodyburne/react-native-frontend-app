@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import {ScrollView, FlatList} from 'react-native';
+import {FlatList} from 'react-native';
 import Button, {ButtonGroup, CancelButton, DisabledButton} from '../components/ui/Button';
 import styled from 'styled-components';
 import RootContext from '../RootContext';
@@ -78,12 +78,11 @@ const AddPlacesScreen = ({navigation}) => {
                 />
             </CenteredView>
                 <PlacesContainer style={shadow}>
-                    <ScrollView>
                         <Label style={{alignSelf: 'flex-start'}}>Places</Label>
                         {places.length > 0 ?
                             <FlatList
                                 data={places}
-                                keyExtractor={item => item.id}
+                                keyExtractor={item => String(item.id)}
                                 renderItem={({ item }) => { 
                                 return (
                                     <ListItem 
@@ -97,7 +96,6 @@ const AddPlacesScreen = ({navigation}) => {
                             :  
                                 <NoPlacesText>You don't have any places for this trip</NoPlacesText>
                         }
-                    </ScrollView>
                 </PlacesContainer>
             <Footer>
                 <ButtonGroup style={{marginTop: 10}}>

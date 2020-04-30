@@ -1,9 +1,15 @@
 import React, {useContext, useState, useEffect} from 'react';
-import {View, FlatList} from 'react-native'
 import RootContext from '../../RootContext';
 import {getId} from '../../App';
 import CheckListItem from '../ui/CheckListItem';
 import ListItem from '../ui/ListItem';
+import styled from 'styled-components';
+
+const CenteredView = styled.View`
+    align-items: center;
+    padding: 15px;
+    background-color: #FFFFFF;
+`;
 
 const ThingToDo = ({data, placeIndex, tripCopy, thingToDo, state, callback}) => {
     const { actions } = useContext(RootContext);
@@ -52,20 +58,18 @@ const ThingToDo = ({data, placeIndex, tripCopy, thingToDo, state, callback}) => 
     };
 
     return (
-        <View style={{alignItems: 'center', padding: 15, backgroundColor: '#FFFFFF'}}>
-            <FlatList
-                data={data[thingToDo]}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => { 
-                return (
-                    <View>
-                        <CheckListItem 
-                            checkHandler={() => handleSelect(thingToDo, item.id)}
-                            checkValue={checked[thingToDo][item.id]}
-                            value={item.name}
-                            handler={() => deleteItem(item)}/>
-                    </View>
-                    )}} />
+        <CenteredView>
+            {   
+                data[thingToDo] &&  
+                data[thingToDo].map(item => (
+                    <CheckListItem 
+                        key={item.id}
+                        checkHandler={() => handleSelect(thingToDo, item.id)}
+                        checkValue={checked[thingToDo][item.id]}
+                        value={item.name}
+                        handler={() => deleteItem(item)}/>
+                ))
+            }
             <ListItem 
                 value={state}
                 onChange={callback}
@@ -73,7 +77,7 @@ const ThingToDo = ({data, placeIndex, tripCopy, thingToDo, state, callback}) => 
                 icon="plus"
                 handler={addItem}
                 />
-        </View>
+        </CenteredView>
     )
 };
 

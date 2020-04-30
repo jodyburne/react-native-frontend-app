@@ -81,7 +81,7 @@ const MyProfileScreen = ({navigation}) => {
                             <Icon 
                                 style={{color: '#3D83FF'}}
                                 name="plus" 
-                                size={30} />
+                                size={20} />
                         </TouchableOpacity>
                     </TitleContainer>
                         <PlacesText>{places.substring(0, places.length - 2)}</PlacesText>

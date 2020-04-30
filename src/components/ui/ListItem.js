@@ -37,14 +37,14 @@ export const CrossContainer = styled.TouchableOpacity`
 
 const ListItem = ({fontSize, value, handler, icon, style, placeholder, onChange, editable}) =>  (
         <Item style={{elevation: 4}}>
-                <Content 
-                    style={fontSize}
-                    placeholder={placeholder}
-                    value={value} 
-                    autoCorrect={false}
-                    editable={editable}
-                    onChangeText={onChange}
-                    onSubmitEditing={handler}/>
+            <Content 
+                style={fontSize}
+                placeholder={placeholder}
+                value={value} 
+                autoCorrect={false}
+                editable={editable}
+                onChangeText={onChange}
+                onSubmitEditing={handler}/>
             <CrossContainer
                 onPress={handler}>
                 <Icon 

@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react';
-import {View, FlatList, SafeAreaView, ScrollView} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import styled from 'styled-components';
 import Button from '../components/ui/Button';
 import RootContext from '../RootContext';
@@ -16,10 +16,14 @@ const HeadingContainer = styled.View`
     margin-left: 30px;
     margin-bottom: 10px;
     align-items: center;
+    padding-top: 20px;
 `;
 
 const CenteredView = styled.View`
     align-items: center;
+`;
+const WhiteScrollView = styled.ScrollView`
+    background-color: #FFFFFF;
 `;
 
 const CheckListScreen = ({navigation}) => {
@@ -29,7 +33,7 @@ const CheckListScreen = ({navigation}) => {
     const { actions, state: {trips} } = useContext(RootContext);
     const { tripId } = navigation.state.params;
     const trip = trips.find(t => t.id === tripId);
-    
+
     useEffect(() => {
         const initState = {}
         if (trip.checkList){
@@ -41,7 +45,7 @@ const CheckListScreen = ({navigation}) => {
     }, []);
 
     const tripCopy = {...trip };
-    
+
     const addItem = () => {
         if (!trip.checkList) tripCopy.checkList = [];
         const id = getId();
@@ -68,43 +72,41 @@ const CheckListScreen = ({navigation}) => {
     };
 
     const saveChanges = () => {
+        if (tripCopy.checkList) {
         tripCopy.checkList.map(c => c.completed = checked[c.id])
-        actions.editTrip(tripCopy);
+        actions.editTrip(tripCopy)};
         navigation.navigate('TripDetail', {trip});
     };
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView>
-                <Title 
-                    title="Trip Essentials" 
-                    style={{padding: 25}}/>
+            <Title
+                title="Trip Essentials"
+                style={{padding: 35}}/>
+            <WhiteScrollView>
                 <HeadingContainer>
-                    <Icon 
+                    <Icon
                         name="clipboard-list"
                         size={30}
                         style={{color: "#3D83FF", padding: 5}}
                     />
                     <SubHeadingText>Things To Remember</SubHeadingText>
                 </HeadingContainer>
+                {   trip.checkList && 
+                    trip.checkList.map(item => (
+                        <CenteredView key={item.id}>
+                            <CheckListItem
+                                value={item.name}
+                                handler={() => { deleteItem(item)}}
+                                checkValue={checked[item.id]}
+                                checkHandler={() => handleSelect(item.id)}
+                                editable={false}
+                            />
+                        </CenteredView>
+                    ))
+                }
                 <CenteredView>
-                    <FlatList
-                        data={trip.checkList}
-                        keyExtractor={(item) => item.id}
-                        renderItem={({ item }) => { 
-                        return (
-                            <View>
-                                <CheckListItem 
-                                    value={item.name}
-                                    handler={() => { deleteItem(item)}}
-                                    checkValue={checked[item.id]}
-                                    checkHandler={() => handleSelect(item.id)}
-                                    editable={false}
-                                />
-                            </View>
-                        )}}
-                        />
-                    <ListItem 
+                    <ListItem
                         placeholder="Add an item"
                         icon="plus"
                         value={listItem}
@@ -112,10 +114,10 @@ const CheckListScreen = ({navigation}) => {
                         handler={addItem}
                     />
                 </CenteredView>
-            </ScrollView>
+            </WhiteScrollView>
             <Footer>
                 <Button
-                    buttonText="Done" 
+                    buttonText="Done"
                     handler={saveChanges}
                     style={{width: 360}}
                 />

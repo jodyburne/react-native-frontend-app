@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react';
-import {ScrollView, FlatList, SafeAreaView} from 'react-native';
+import {FlatList, SafeAreaView} from 'react-native';
 import Button from '../components/ui/Button';
 import RootContext from '../RootContext';
 import {getId} from '../App';
@@ -56,7 +56,6 @@ const PlacesBeenScreen = ({navigation}) => {
                 />
             </CenteredView>
             <PlacesContainer style={shadow}>
-                <ScrollView>
                     <Label style={{alignSelf: 'flex-start'}}>Places</Label>
                     {places.length > 0 ?
                         <FlatList
@@ -75,7 +74,6 @@ const PlacesBeenScreen = ({navigation}) => {
                         :  
                             <NoPlacesText>You haven't been anywhere</NoPlacesText>
                     }
-                </ScrollView>
             </PlacesContainer>
             <Footer>
                 <Button 

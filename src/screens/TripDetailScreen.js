@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {Text, View, FlatList, TouchableOpacity, Modal, SafeAreaView, ScrollView} from 'react-native';
+import { View, FlatList, TouchableOpacity, Modal, SafeAreaView, ScrollView} from 'react-native';
 import RootContext from '../RootContext';
 import Duration from '../components/addTrip/Duration';
 import ListItem from '../components/ui/ListItem';
@@ -76,25 +76,76 @@ const TripDetailScreen = ({navigation}) => {
     return (
         <SafeAreaView style={{ flex: 1}}>
             <BackDrop
-                source={{uri: "https://wimg.jakpost.travel/wimages/sm/186-1865394_mount-fuji-sunset-mt-fuji-wallpaper-portrait.jpg"}}
-                >
+                source={{uri: "https://wimg.jakpost.travel/wimages/sm/186-1865394_mount-fuji-sunset-mt-fuji-wallpaper-portrait.jpg"}}>
+                <Modal 
+                    animationType="slide"
+                    //transparent={true}
+                    visible={visible}>
+                    <DeleteModal 
+                        title={trip.name}
+                        mainText="Are you sure you want to remove this trip?"
+                        smallPrint={`By removing ${trip.name} from your trips you are also removing the list of places related to it`}
+                        cancelHandler={() => setVisible(!visible)}
+                        removeHandler={() => {
+                            setVisible(!visible)
+                            actions.deleteTrip(trip)
+                            navigation.navigate('MyTrips');
+                        }}
+                    />
+                </Modal>
+                { trip.places.length > 0 ?    
+                    <FlatList
+                        ListHeaderComponent={
+                            <>
+                                <Header>{trip.name}</Header>
+                                <Label>Duration</Label>
+                                <Duration
+                                    style={{width: 350, marginLeft: 5}}
+                                    startDate={trip.duration.start}
+                                    endDate={trip.duration.end}
+                                />
+                                <Label>Places</Label>
+                            </>
+                            }
+                        data={trip.places}
+                        keyExtractor={item => String(item.id)}
+                        renderItem={({ item }) => { 
+                            return (
+                                <ListItem 
+                                    fontSize={{fontSize: 24}}
+                                    icon="right"
+                                    value={item.name}
+                                    editable={false}
+                                    handler={() => navigation.navigate('ThingsToDo', {tripId: trip.id, placeId: item.id, name: item.name})}
+                                />
+                            )}} 
+                        ListFooterComponent={
+                            <>
+                                <Label>Organise your trip</Label>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        navigation.navigate('CheckList', {tripId: trip.id })
+                                    }}>
+                                    <CheckListContainer>
+                                        <Icon 
+                                            style={{marginBottom: 15, color: '#3D83FF'}}
+                                            name="clipboard-list"
+                                            size={30}
+                                        />
+                                        <Lower>
+                                            <LinkText>Check List</LinkText>
+                                        </Lower>
+                                    </CheckListContainer>
+                                </TouchableOpacity>
+                                <OpenModalLink 
+                                    text="Remove from your trips"
+                                    handler={() => setVisible(true)}
+                                />
+                            </>
+                        }
+                    />
+                :
                 <ScrollView>
-                    <Modal 
-                        animationType="slide"
-                        //transparent={true}
-                        visible={visible}>
-                        <DeleteModal 
-                            title={trip.name}
-                            mainText="Are you sure you want to remove this trip?"
-                            smallPrint={`By removing ${trip.name} from your trips you are also removing the list of places related to it`}
-                            cancelHandler={() => setVisible(!visible)}
-                            removeHandler={() => {
-                                setVisible(!visible)
-                                actions.deleteTrip(trip)
-                                navigation.navigate('MyTrips');
-                            }}
-                        />
-                    </Modal>
                     <Header>{trip.name}</Header>
                     <Label>Duration</Label>
                     <Duration
@@ -104,23 +155,7 @@ const TripDetailScreen = ({navigation}) => {
                     />
                         <View>
                             <Label>Places</Label>
-                            {trip.places.length > 0 ?
-                                <FlatList
-                                    data={trip.places}
-                                    keyExtractor={item => String(item.id)}
-                                    renderItem={({ item }) => { 
-                                    return (
-                                        <ListItem 
-                                            fontSize={{fontSize: 24}}
-                                            icon="right"
-                                            value={item.name}
-                                            editable={false}
-                                            handler={() => navigation.navigate('ThingsToDo', {tripId: trip.id, placeId: item.id, name: item.name})}
-                                        />
-                                    )}} />
-                                :  
                                     <NoPlaces>You don't have any places for this trip</NoPlaces>
-                            }
                         </View>
                         <Label>Organise your trip</Label>
                         <TouchableOpacity
@@ -143,6 +178,7 @@ const TripDetailScreen = ({navigation}) => {
                             handler={() => setVisible(true)}
                             />
                 </ScrollView>
+                }
             </BackDrop>
             <Footer>
                 <Button 
