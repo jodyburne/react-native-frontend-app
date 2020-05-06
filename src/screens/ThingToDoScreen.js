@@ -10,8 +10,13 @@ import Footer from '../components/ui/Footer';
 import ThingToDoHeading from '../components/tripDetail/ThingToDoHeading';
 
 const Container = styled.SafeAreaView`
-    background-color: #FFFFFF;
     flex: 1;
+
+    ${({visible}) => visible ? `
+        background-color: #000000;
+        opacity: 0.3;
+    ` : `
+        background-color: #FFFFFF;`}
 `;
 
 const TitleContainer = styled.View`
@@ -56,28 +61,29 @@ const ThingToDoScreen = ({navigation}) => {
     };
 
     return (
-        <Container>
+        <Container
+            visible={visible}>
+            <Modal 
+                animationType="slide"
+                transparent={true}
+                visible={visible}>
+                <DeleteModal 
+                    title={place.name}
+                    mainText="Are you sure you want to remove this place from your trip?"
+                    smallPrint={`By removing ${place.name} from your trip you are also removing the list of things related to this place.`}
+                    cancelHandler={() => setVisible(!visible)}
+                    removeHandler={() => {
+                        setVisible(!visible)
+                        deletePlace()
+                    }}
+                />
+            </Modal>
             {place &&
                 <ScrollView>
                     <TitleContainer>
                         <Title 
                             title="Things I'm going to do"/>
                     </TitleContainer>
-                    <Modal 
-                        animationType="slide"
-                        //transparent={true}
-                        visible={visible}>
-                        <DeleteModal 
-                            title={place.name}
-                            mainText="Are you sure you want to remove this place from your trip?"
-                            smallPrint={`By removing ${place.name} from your trip you are also removing the list of things related to this place.`}
-                            cancelHandler={() => setVisible(!visible)}
-                            removeHandler={() => {
-                                setVisible(!visible)
-                                deletePlace()
-                            }}
-                        />
-                        </Modal>
                     <ThingToDoHeading 
                         state={show.restaurants}
                         handler={() => {

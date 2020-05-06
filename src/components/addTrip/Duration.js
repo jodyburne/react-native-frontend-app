@@ -51,7 +51,7 @@ const shadow = {
     elevation: 5
 };
 
-const Duration = ({startDate, endDate, changeStart, changeEnd, style}) => {
+const Duration = ({selected, changeSelected, startDate, endDate, changeStart, changeEnd, style}) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [date, setDate] = useState({
         start: false,
@@ -141,6 +141,7 @@ const Duration = ({startDate, endDate, changeStart, changeEnd, style}) => {
                 <TouchableHighlight
                     onPress={() => {
                     setModalVisible(true);
+                    changeSelected({...selected, start: true});
                     setDate({...date, start: true});
                     }}>
                     <DatePickerContainer 
@@ -158,6 +159,7 @@ const Duration = ({startDate, endDate, changeStart, changeEnd, style}) => {
                 <TouchableHighlight
                     onPress={() => {
                     setModalVisible(true);
+                    changeSelected({...selected, end: true});
                     setDate({...date, end: true});
                     }}>
                     <DatePickerContainer 

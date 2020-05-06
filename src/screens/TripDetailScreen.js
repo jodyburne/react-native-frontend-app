@@ -9,6 +9,13 @@ import DeleteModal, {OpenModalLink} from '../components/tripDetail/DeleteModal';
 import Footer from '../components/ui/Footer';
 import Button from '../components/ui/Button';
 
+const PageContainer = styled.SafeAreaView`
+    flex: 1;
+        ${({visible}) => visible && `
+        opacity: 0.3; 
+        backgroundColor: #000000`}
+`;
+
 const CheckListContainer = styled.View`
     margin-left: 5px;
     margin-bottom: 10px;
@@ -74,12 +81,10 @@ const TripDetailScreen = ({navigation}) => {
     const { actions } = useContext(RootContext);
 
     return (
-        <SafeAreaView style={{ flex: 1}}>
-            <BackDrop
-                source={{uri: "https://wimg.jakpost.travel/wimages/sm/186-1865394_mount-fuji-sunset-mt-fuji-wallpaper-portrait.jpg"}}>
+        <>
                 <Modal 
                     animationType="slide"
-                    //transparent={true}
+                    transparent={true}
                     visible={visible}>
                     <DeleteModal 
                         title={trip.name}
@@ -93,6 +98,10 @@ const TripDetailScreen = ({navigation}) => {
                         }}
                     />
                 </Modal>
+        <PageContainer
+            visible={visible}>
+            <BackDrop
+                source={{uri: "https://wimg.jakpost.travel/wimages/sm/186-1865394_mount-fuji-sunset-mt-fuji-wallpaper-portrait.jpg"}}>
                 { trip.places.length > 0 ?    
                     <FlatList
                         ListHeaderComponent={
@@ -186,7 +195,8 @@ const TripDetailScreen = ({navigation}) => {
                     handler={() => navigation.navigate('MyTrips')}
                     buttonText="Done"/>
             </Footer>
-        </SafeAreaView>
+        </PageContainer>
+        </>
     );
 };
 

@@ -33,7 +33,11 @@ const AddTripScreen = ({navigation}) => {
     const [name, setName] = useState('');
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
-
+    const [selected, setSelected] = useState({
+        start: false,
+        end: false
+    })
+    console.log(selected)
     return (
         <>
             <TitleContainer>
@@ -53,6 +57,8 @@ const AddTripScreen = ({navigation}) => {
                         changeStart={setStartDate}
                         endDate={endDate}
                         changeEnd={setEndDate}
+                        selected={selected}
+                        changeSelected={setSelected}
                     />
                 </DurationContainer>
             </Container>
@@ -62,7 +68,7 @@ const AddTripScreen = ({navigation}) => {
                         buttonText="Back" 
                         handler={() => navigation.navigate('MyTrips')} />
                         { 
-                            name ? 
+                            (name && selected.start && selected.end) ? 
                                 <Button 
                                     buttonText="Next"
                                     handler={() => navigation.navigate('AddPlaces', {name, startDate, endDate})} />
